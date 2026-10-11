@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Center Class on 7/10/2026</title>
+    <style>
+        :root {
+            --bg-base: #0b1120;
+            --bg-card: #131d33;
+            --bg-elevated: #1a2744;
+            --bg-input: #0f172a;
+            --accent-gold: #f59e0b;
+            --accent-gold-hover: #d97706;
+            --accent-cyan: #38bdf8;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-subtle: #243556;
+            --border-active: #475569;
+            --locked-color: #f59e0b;
+            --locked-bg: rgba(245, 158, 11, 0.14);
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            --shadow-elevation: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header.hud {
+            background-color: var(--bg-card);
+            border-bottom: 2px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .hud-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .detective-branding {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .badge-crest {
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle, #f59e0b 20%, #78350f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            border: 2px solid #fbbf24;
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .case-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .case-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hud-meta-group {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .student-pill {
+            background-color: var(--bg-elevated);
+            padding: 0.4rem 0.9rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timer-badge {
+            background-color: #030712;
+            border: 1px solid #374151;
+            padding: 0.35rem 0.85rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .timer-btn {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timer-btn:hover {
+            color: #fff;
+            border-color: var(--accent-gold);
+        }
+
+        nav.stage-progress {
+            background-color: #0d1424;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0.6rem 1rem;
+        }
+
+        .stepper-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .stepper-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 4%;
+            right: 4%;
+            height: 2px;
+            background-color: var(--border-subtle);
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
+        .step-bubble {
+            position: relative;
+            z-index: 2;
+            background-color: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .step-bubble.current {
+            background-color: var(--accent-gold);
+            color: #000;
+            border-color: #fbbf24;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+
+        .step-bubble.done {
+            background-color: #1e293b;
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        main.app-shell {
+            flex: 1;
+            max-width: 1000px;
+            width: 100%;
+            margin: 1.75rem auto;
+            padding: 0 1.25rem 3rem;
+        }
+
+        .dossier-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-elevation);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stage-header {
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stage-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stage-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+        }
+
+        .stage-tag {
+            background-color: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--accent-gold);
+            font-size: 0.78rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .evidence-dossier-box {
+            background-color: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-prompt {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .concept-cue {
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 0.6rem 0.9rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            color: #bae6fd;
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+        }
+
+        .options-stack {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .options-stack.grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .opt-btn {
+            background-color: #17233f;
+            border: 2px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 0.9rem 1.25rem;
+            font-size: 0.98rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: var(--accent-gold);
+            background-color: #1c2b4c;
+        }
+
+        .opt-btn.is-locked {
+            border-color: var(--locked-color) !important;
+            background-color: var(--locked-bg) !important;
+            color: #fff !important;
+            box-shadow: 0 0 0 1px var(--locked-color);
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+
+        .opt-btn .lock-indicator {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            display: none;
+        }
+
+        .opt-btn.is-locked .lock-indicator {
+            display: inline-block;
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .lock-status-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .btn-proceed {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-proceed:disabled {
+            background: #334155;
+            color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            opacity: 0.6;
+        }
+
+        .btn-proceed:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .login-wrap {
+            max-width: 560px;
+            margin: 2.5rem auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-elevation);
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .rating-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .rating-master {
+            background-color: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #34d399;
+        }
+
+        .rating-senior {
+            background-color: rgba(56, 189, 248, 0.15);
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+        }
+
+        .rating-cadet {
+            background-color: rgba(245, 158, 11, 0.15);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+        }
+
+        .review-table-wrap {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+        }
+
+        table.dossier-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        table.dossier-table th {
+            background-color: #0d1424;
+            color: var(--text-muted);
+            padding: 0.85rem 1rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        table.dossier-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+            vertical-align: top;
+        }
+
+        table.dossier-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .status-pill.correct {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid #10b981;
+        }
+
+        .status-pill.incorrect {
+            background: rgba(244, 63, 94, 0.2);
+            color: #f43f5e;
+            border: 1px solid #f43f5e;
+        }
+
+        .user-msg-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            border: 1px solid var(--accent-gold);
+            color: #fff;
+            padding: 0.85rem 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @media print {
+            header.hud, nav.stage-progress, .action-row, .no-print, .user-msg-box {
+                display: none !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .dossier-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                background: #ffffff !important;
+            }
+            table.dossier-table th {
+                background-color: #f1f5f9 !important;
+                color: #000000 !important;
+                border-bottom: 2px solid #334155 !important;
+            }
+            table.dossier-table td {
+                color: #000000 !important;
+                border-bottom: 1px solid #cbd5e1 !important;
+            }
+            .rating-badge {
+                border: 2px solid #000000 !important;
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="user-alert-toast" class="user-msg-box"></div>
+
+    <header class="hud">
+        <div class="hud-wrap">
+            <div class="detective-branding">
+                <div class="badge-crest">✍️</div>
+                <div>
+                    <div class="case-title">Writing Center Class on 7/10/2026</div>
+                    <div class="case-subtitle">Academic Writing & Accuracy Diagnostics • CEFR A2–B1</div>
+                    <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">designed by Muhammad Shahzad</div>
+                </div>
+            </div>
+
+            <div class="hud-meta-group">
+                <div class="student-pill" id="hud-student-tag" style="display: none;">
+                    <span>Student:</span>
+                    <strong id="hud-name-display" style="color: var(--accent-gold);">Author</strong>
+                </div>
+
+                <div class="timer-badge">
+                    <span id="timer-display">60:00</span>
+                    <button class="timer-btn" id="timer-toggle-btn" title="Pause / Resume Timer">⏸</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="stage-progress" id="stage-nav-bar" style="display: none;">
+        <div class="stepper-container">
+            <div class="step-bubble current" id="step-node-1" title="Stage 1">1</div>
+            <div class="step-bubble" id="step-node-2" title="Stage 2">2</div>
+            <div class="step-bubble" id="step-node-3" title="Stage 3">3</div>
+            <div class="step-bubble" id="step-node-4" title="Stage 4">4</div>
+            <div class="step-bubble" id="step-node-5" title="Stage 5">5</div>
+            <div class="step-bubble" id="step-node-6" title="Stage 6">6</div>
+            <div class="step-bubble" id="step-node-7" title="Final Dossier">★</div>
+        </div>
+    </nav>
+
+    <main class="app-shell">
+
+        <!-- ================= COVER PAGE / LOGIN PORTAL ================= -->
+        <section id="screen-login" class="login-wrap">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📝</div>
+            <h2 style="color: #fff; margin-bottom: 0.25rem;">Writing Center Class on 7/10/2026</h2>
+            <div style="font-size: 0.88rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.85rem; letter-spacing: 0.5px;">
+                designed by Muhammad Shahzad
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Official Foundation English Diagnostic: Subject-Verb Agreement, Syntax & Run-ons, Spelling & Mechanics, Lexical Collocations, and Preposition Accuracy. Enter your credentials to begin.
+            </p>
+
+            <form id="login-form" onsubmit="handleStartGame(event)">
+                <div class="form-group">
+                    <label class="form-label" for="input-name">Student Full Name</label>
+                    <input type="text" id="input-name" class="form-input" placeholder="e.g., Tariq Al-Busaidi" required autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="input-section">Student ID / University Campus & Section</label>
+                    <input type="text" id="input-section" class="form-input" placeholder="e.g., UTAS-Ibra / Writing Center Section 2" required>
+                </div>
+
+                <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid var(--accent-gold); padding: 0.75rem; border-radius: 4px; margin-bottom: 1.5rem; text-align: left; font-size: 0.82rem; color: #fde68a;">
+                    <strong>Strict Evaluation Protocol:</strong><br>
+                    • One attempt only per question: your option locks immediately upon selection.<br>
+                    • Detailed linguistic feedback and scores are withheld until the final report.
+                </div>
+
+                <button type="submit" class="btn-proceed" style="width: 100%; justify-content: center;">
+                    Authorize Credentials & Open Assessment →
+                </button>
+            </form>
+        </section>
+
+        <section id="screen-gameplay" style="display: none;">
+            <div class="dossier-card">
+                
+                <div class="stage-header">
+                    <div>
+                        <h3 class="stage-title" id="stage-title-text">Stage 1: Core Formative Diagnostics</h3>
+                        <p class="stage-desc" id="stage-desc-text">Core Academic Grammar, Mechanics, and Concord.</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem;">
+                        <span class="stage-tag" id="stage-badge-text">STAGE 1 OF 6</span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;" id="question-tracker">Item 1 of 10</span>
+                    </div>
+                </div>
+
+                <div id="dynamic-stage-body"></div>
+
+                <div class="action-row">
+                    <span class="lock-status-note" id="lock-status-text">Select an option to immediately lock your answer.</span>
+                    <button class="btn-proceed" id="btn-next-question" disabled onclick="handleProceedNext()">
+                        Submit & Next Item →
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="screen-dossier" style="display: none;">
+            <div class="dossier-card">
+                <div style="text-align: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📜</div>
+                    <h2 style="color: #fff; font-size: 1.7rem; text-transform: uppercase; letter-spacing: 1px;">Official Writing Center Evaluation Dossier</h2>
+                    <p style="color: var(--accent-gold); font-weight: 700; font-size: 0.95rem;">Writing Center Class on 7/10/2026</p>
+                    <p style="color: #94a3b8; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">designed by Muhammad Shahzad</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; background: var(--bg-elevated); padding: 1.25rem; border-radius: 8px;">
+                    <div>
+                        <div class="form-label">Student Name</div>
+                        <div style="font-size: 1.1rem; font-weight: 800; color: #fff;" id="dossier-student-name">-</div>
+                    </div>
+                    <div>
+                        <div class="form-label">ID / Campus & Section</div>
+                        <div style="font-size: 1.1rem; font-weight: 800; color: #fff;" id="dossier-student-section">-</div>
+                    </div>
+                    <div>
+                        <div class="form-label">Total Score</div>
+                        <div style="font-size: 1.2rem; font-weight: 800; color: var(--accent-gold);" id="dossier-score-text">0 / 60 (0%)</div>
+                    </div>
+                    <div>
+                        <div class="form-label">Proficiency Tier</div>
+                        <div id="dossier-rank-container"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Item-by-Item Socratic Linguistic Breakdown</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        Review your locked choices alongside targeted rules and remedial linguistic explanations.
+                    </p>
+
+                    <div class="review-table-wrap">
+                        <table class="dossier-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">#</th>
+                                    <th style="width: 15%;">Error Category</th>
+                                    <th style="width: 32%;">Question Prompt</th>
+                                    <th style="width: 15%;">Your Locked Choice</th>
+                                    <th style="width: 15%;">Correct Answer</th>
+                                    <th style="width: 18%;">Linguistic Explanation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dossier-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem;" class="no-print">
+                    <button class="btn-proceed" style="background: #334155; color: #fff;" onclick="window.print()">
+                        🖨️ Print / Save PDF Dossier
+                    </button>
+                    <button class="btn-proceed" onclick="location.reload()">
+                        🔄 Retake Practice Session
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        class DetectiveAudioEngine {
+            constructor() {
+                this.ctx = null;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioCtx();
+                }
+            }
+
+            playTone(freq, type, duration, gainLevel = 0.12) {
+                try {
+                    this.init();
+                    if (this.ctx.state === 'suspended') this.ctx.resume();
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = type;
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(gainLevel, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + duration);
+                } catch(e) {}
+            }
+
+            lockSound() {
+                this.playTone(500, 'sine', 0.08, 0.1);
+            }
+
+            advanceSound() {
+                this.playTone(650, 'triangle', 0.1, 0.08);
+            }
+
+            fanfare() {
+                [440, 554, 659, 880].forEach((f, idx) => {
+                    setTimeout(() => this.playTone(f, 'triangle', 0.4, 0.15), idx * 100);
+                });
+            }
+        }
+
+        const audio = new DetectiveAudioEngine();
+
+        function showToast(msg) {
+            const toast = document.getElementById('user-alert-toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        const GameData = {
+            studentName: "",
+            studentSection: "",
+            timerSeconds: 3600, // 60:00
+            timerRunning: true,
+            timerInterval: null,
+            currentStage: 1,
+            currentQuestionIdx: 0,
+            lockedAnswerForCurrent: null,
+            userSubmissions: [],
+
+            stages: [
+                // ================= STAGE 1 (Items 1 to 10) =================
+                [
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "Many _______ believe that AI is helpful.",
+                        options: ["student", "students", "a student", "student's"],
+                        correct: "students",
+                        conceptCue: "Concept Cue: The quantifier 'Many' requires a plural countable noun.",
+                        explanation: "'Many' must be followed by the plural noun 'students'. 'Student' is singular and 'student's' indicates possession."
+                    },
+                    {
+                        category: "MECHANICS_SPELLING",
+                        prompt: "Students often use AI to finish _______ assignments.",
+                        options: ["thir", "there", "their", "they're"],
+                        correct: "their",
+                        conceptCue: "Concept Cue: Identify the possessive adjective meaning 'belonging to them'.",
+                        explanation: "'Their' is the third-person plural possessive adjective. 'There' specifies location and 'they're' is the contraction of 'they are'."
+                    },
+                    {
+                        category: "SYNTAX_FRAGMENT",
+                        prompt: "AI _______ students save a lot of time.",
+                        options: ["helping", "helps", "help", "is help"],
+                        correct: "helps",
+                        conceptCue: "Concept Cue: Third-person singular subject requires the third-person singular present verb (-s).",
+                        explanation: "'AI' is treated as a singular subject, requiring the present simple verb 'helps'. 'Helping' creates an incomplete fragment without an auxiliary."
+                    },
+                    {
+                        category: "MECHANICS_SPELLING",
+                        prompt: "Do not _______ your money on expensive apps.",
+                        options: ["wast", "waste", "waist", "west"],
+                        correct: "waste",
+                        conceptCue: "Concept Cue: Select the correct verb meaning to spend carelessly or squander.",
+                        explanation: "'Waste' means to squander. 'Waist' refers to the midsection of the human body and 'west' is a cardinal direction."
+                    },
+                    {
+                        category: "NOUN_COUNTABILITY",
+                        prompt: "The internet provides a lot of _______.",
+                        options: ["information", "informations", "inform", "informed"],
+                        correct: "information",
+                        conceptCue: "Concept Cue: 'Information' is an uncountable (mass) noun in English.",
+                        explanation: "'Information' is an uncountable noun and cannot take an '-s' plural suffix. It never occurs as 'informations'."
+                    },
+                    {
+                        category: "SYNTAX_RUN_ON",
+                        prompt: "Which is the correctly punctuated sentence?",
+                        options: ["AI is fast it is easy.", "AI is fast, it is easy.", "AI is fast. It is easy.", "AI is fast it's easy."],
+                        correct: "AI is fast. It is easy.",
+                        conceptCue: "Concept Cue: Two independent clauses must be joined with a period or semicolon to prevent run-ons.",
+                        explanation: "Two independent clauses must be separated by a period, a semicolon, or a coordinating conjunction with a comma. 'AI is fast, it is easy' is an incorrect comma splice."
+                    },
+                    {
+                        category: "MECHANICS_SPELLING",
+                        prompt: "Cheating is a _______ issue in schools.",
+                        options: ["serious", "seriouse", "sirious", "seriouss"],
+                        correct: "serious",
+                        conceptCue: "Concept Cue: Choose the standard spelling of the adjective meaning grave or severe.",
+                        explanation: "The correct standard academic spelling is 'serious'."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "Using too much technology might cause brain _______.",
+                        options: ["roat", "rot", "rote", "wrote"],
+                        correct: "rot",
+                        conceptCue: "Concept Cue: Select the noun meaning mental decay or decline.",
+                        explanation: "'Brain rot' is the fixed idiom/collocation referring to intellectual decline. 'Rote' refers to memorization and 'wrote' is past tense of write."
+                    },
+                    {
+                        category: "MECHANICS_SPELLING",
+                        prompt: "I can solve this _______ easily.",
+                        options: ["broplem", "problem", "problim", "probelm"],
+                        correct: "problem",
+                        conceptCue: "Concept Cue: Standard academic spelling for an obstacle or difficulty.",
+                        explanation: "The correct standard spelling is 'problem'."
+                    },
+                    {
+                        category: "TENSE_INCONSISTENCY",
+                        prompt: "AI _______ solutions instantly.",
+                        options: ["gave", "gives", "giving", "given"],
+                        correct: "gives",
+                        conceptCue: "Concept Cue: Expressing a permanent general truth requires the Present Simple singular verb.",
+                        explanation: "General factual capabilities of AI take the Present Simple singular: 'gives'. 'Giving' is an incomplete participle."
+                    }
+                ],
+
+                // ================= STAGE 2 (Items 11 to 20) =================
+                [
+                    {
+                        category: "TENSE_INCONSISTENCY",
+                        prompt: "Students should use AI so they _____ time.",
+                        options: ["don't wasting", "don't waste", "no waste", "doesn't waste"],
+                        correct: "don't waste",
+                        conceptCue: "Concept Cue: The auxiliary 'do/don't' requires the base form of the verb.",
+                        explanation: "The negative present structure for plural 'they' is 'don't' + base verb ('waste'). 'Don't wasting' is ungrammatical."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "There are many _____ to using technology.",
+                        options: ["advanteges", "advantages", "advantegis", "advantiges"],
+                        correct: "advantages",
+                        conceptCue: "Concept Cue: Standard plural spelling of the noun meaning favorable features.",
+                        explanation: "The correct academic spelling is 'advantages'."
+                    },
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "Artificial Intelligence _____ students find answers quickly.",
+                        options: ["help", "helping", "helps", "are help"],
+                        correct: "helps",
+                        conceptCue: "Concept Cue: 'Artificial Intelligence' is singular and requires a singular verb.",
+                        explanation: "Singular subject 'Artificial Intelligence' agrees with the singular verb 'helps'."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "Using AI to get answers during a test is a way to _____.",
+                        options: ["cheap", "cheating", "cheat", "cheaps"],
+                        correct: "cheat",
+                        conceptCue: "Concept Cue: An infinitive 'to' must be followed by the base verb.",
+                        explanation: "The full infinitive requires 'to' + base verb ('cheat'). 'Cheap' is an adjective."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "In _____, I believe AI is a useful tool.",
+                        options: ["conclution", "conclusion", "concluson", "conclusioning"],
+                        correct: "conclusion",
+                        conceptCue: "Concept Cue: Select the standard spelling for the discourse marker 'In conclusion'.",
+                        explanation: "The transitional phrase is spelled 'In conclusion'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Students cannot _____ on their lessons if they are distracted.",
+                        options: ["foucase", "focus", "focuse", "focous"],
+                        correct: "focus",
+                        conceptCue: "Concept Cue: Modal auxiliary 'cannot' takes the base verb meaning to concentrate.",
+                        explanation: "The correct standard spelling is 'focus'."
+                    },
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "The main _____ of AI are speed and efficiency.",
+                        options: ["advantage", "advantages", "advantagess", "advanteges"],
+                        correct: "advantages",
+                        conceptCue: "Concept Cue: The linking verb 'are' indicates that the subject must be plural.",
+                        explanation: "Because the verb is plural ('are'), the subject must be the plural noun 'advantages'."
+                    },
+                    {
+                        category: "SYNTAX_RUN_ON",
+                        prompt: "AI is fast. _____, it helps students save time.",
+                        options: ["Also", "Because", "Also it", "Moreover"],
+                        correct: "Moreover",
+                        conceptCue: "Concept Cue: Choose the formal additive conjunct followed by a comma.",
+                        explanation: "'Moreover' is an academic sentence connector used to add supporting information at the start of a sentence."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Students should be careful with _____ personal information.",
+                        options: ["thier", "there", "their", "they're"],
+                        correct: "their",
+                        conceptCue: "Concept Cue: Select the possessive form referring to students.",
+                        explanation: "'Their' is the correct third-person plural possessive pronoun."
+                    },
+                    {
+                        category: "TENSE_INCONSISTENCY",
+                        prompt: "If a student _____ on AI too much, they might become lazy.",
+                        options: ["depend", "depends", "depending", "is depend"],
+                        correct: "depends",
+                        conceptCue: "Concept Cue: First conditional 'if'-clause with singular subject 'a student'.",
+                        explanation: "Singular subject 'a student' in the present conditional clause takes 'depends'."
+                    }
+                ],
+
+                // ================= STAGE 3 (Items 21 to 30) =================
+                [
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Which of the following is punctuated correctly?",
+                        options: ["First,They help students.", "First, They help students.", "First ,They help students.", "First , They help students."],
+                        correct: "First, They help students.",
+                        conceptCue: "Concept Cue: A comma attaches directly to the word preceding it with exactly one space after.",
+                        explanation: "In standard typography and punctuation rules, a comma attaches directly to the word preceding it with exactly one space following: 'First, They...'"
+                    },
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "AI can help students understand complex _______ in less time.",
+                        options: ["topic", "topics", "a topic", "an topics"],
+                        correct: "topics",
+                        conceptCue: "Concept Cue: Plural reference without an article requires the plural noun.",
+                        explanation: "Without an article, 'understand complex topics' requires the plural noun 'topics'."
+                    },
+                    {
+                        category: "SYNTAX_RUN_ON",
+                        prompt: "AI improves writing ______ for example, it checks grammar.",
+                        options: [",", ".", ";", "Both B and C"],
+                        correct: "Both B and C",
+                        conceptCue: "Concept Cue: Two independent clauses can be joined by a semicolon or separated by a period.",
+                        explanation: "Two independent clauses can be legally joined by a semicolon ('; for example,') or separated into two sentences with a period ('. For example,'). A standalone comma creates a run-on comma splice."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Find the correctly spaced sentence:",
+                        options: ["It was correct.In my opinion...", "It was correct. In my opinion...", "It was correct .In my opinion...", "It was correct . In my opinion..."],
+                        correct: "It was correct. In my opinion...",
+                        conceptCue: "Concept Cue: Periods attach to the previous word without a preceding space.",
+                        explanation: "Standard academic mechanics dictates no space before a period and exactly one space following it."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Finally ___ AI tools provide benefits.",
+                        options: [",", ".", ";", ":"],
+                        correct: ",",
+                        conceptCue: "Concept Cue: Transitional intro adverbs must be followed by a comma.",
+                        explanation: "Introductory sequence words such as 'Finally,' 'First,' or 'In conclusion,' are followed by a comma."
+                    },
+                    {
+                        category: "SYNTAX_FRAGMENT",
+                        prompt: "Second, ______ their writing.",
+                        options: ["improve", "it improves", "improving", "to improve"],
+                        correct: "it improves",
+                        conceptCue: "Concept Cue: A complete clause must have both a grammatical subject and a finite verb.",
+                        explanation: "'It improves' supplies both the mandatory subject pronoun and finite verb to prevent an incomplete sentence fragment."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "AI has a negative ______ on learning.",
+                        options: ["affect", "effect", "resulted", "effective"],
+                        correct: "effect",
+                        conceptCue: "Concept Cue: 'Affect' is usually a verb; 'effect' is the noun meaning consequence.",
+                        explanation: "Following the adjective 'negative', a noun is required: 'have a negative effect on'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "On the other hand ___ there are several disadvantages.",
+                        options: [",", ".", ";", "-"],
+                        correct: ",",
+                        conceptCue: "Concept Cue: Prepositional discourse markers take a comma when introducing a clause.",
+                        explanation: "The transitional phrase 'On the other hand,' is always set off with a comma."
+                    },
+                    {
+                        category: "SYNTAX_RUN_ON",
+                        prompt: "Students may receive wrong answers from AI ____ they use them in coursework.",
+                        options: ["and", ",", "but", "so"],
+                        correct: "and",
+                        conceptCue: "Concept Cue: Connect two related independent actions with coordinating conjunction.",
+                        explanation: "'And' appropriately joins the two consecutive actions in the compound structure."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Which sentence follows the 'space-after-period' rule?",
+                        options: ["the content.For example", "the content. For example", "the content .For example", "the content . For example"],
+                        correct: "the content. For example",
+                        conceptCue: "Concept Cue: Follow standard terminal punctuation spacing rules.",
+                        explanation: "A terminal period attaches to the final letter of the preceding word, followed by a space."
+                    }
+                ],
+
+                // ================= STAGE 4 (Items 31 to 40) =================
+                [
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "Most university students _____ that technology is helpful.",
+                        options: ["thinks", "think", "is thinking", "to think"],
+                        correct: "think",
+                        conceptCue: "Concept Cue: 'Most university students' is plural and takes the base verb.",
+                        explanation: "Plural subject 'students' requires the plural verb 'think'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Students must organize _____ schedules to save time.",
+                        options: ["thier", "there", "their", "they're"],
+                        correct: "their",
+                        conceptCue: "Concept Cue: Possessive adjective showing ownership of schedules.",
+                        explanation: "'Their' is the correct possessive form."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "Using a calculator makes math problems _____.",
+                        options: ["very easier", "more easier", "much easier", "the easiest"],
+                        correct: "much easier",
+                        conceptCue: "Concept Cue: Comparatives are intensified using 'much' or 'far', never 'very' or 'more'.",
+                        explanation: "Comparative adjectives like 'easier' are modified by 'much' ('much easier'). 'More easier' is an illegal double comparative."
+                    },
+                    {
+                        category: "SYNTAX_RUN_ON",
+                        prompt: "One benefit of _____ AI is improved efficiency.",
+                        options: ["use", "using", "to use", "used"],
+                        correct: "using",
+                        conceptCue: "Concept Cue: Prepositions ('of') are followed by the gerund (-ing) form.",
+                        explanation: "The preposition 'of' requires a gerund: 'benefit of using AI'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "The factory uses _____ machinery to increase production.",
+                        options: ["modren", "modern", "modrn", "moderen"],
+                        correct: "modern",
+                        conceptCue: "Concept Cue: Standard spelling of the adjective meaning contemporary.",
+                        explanation: "The correct standard spelling is 'modern'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "This assignment will _____ a lot of research.",
+                        options: ["reqwer", "require", "requre", "reqwir"],
+                        correct: "require",
+                        conceptCue: "Concept Cue: Standard spelling of the verb meaning to need or demand.",
+                        explanation: "The correct academic spelling is 'require'."
+                    },
+                    {
+                        category: "SYNTAX_FRAGMENT",
+                        prompt: "In my view, the problems _____ worse than the benefits.",
+                        options: ["are", "is", "be", "being"],
+                        correct: "are",
+                        conceptCue: "Concept Cue: Plural subject 'the problems' requires a finite plural verb.",
+                        explanation: "'The problems' is plural, requiring finite linking verb 'are'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Handmade items have a personal _____.",
+                        options: ["toch", "tuch", "touch", "toushe"],
+                        correct: "touch",
+                        conceptCue: "Concept Cue: Standard spelling of the noun meaning individual distinctive quality.",
+                        explanation: "The idiomatic phrase is 'personal touch'."
+                    },
+                    {
+                        category: "TREND_PREPOSITION",
+                        prompt: "Children often _____ their parents for help.",
+                        options: ["are depend on", "depend on", "depending on", "depends on"],
+                        correct: "depend on",
+                        conceptCue: "Concept Cue: Plural subject 'Children' taking habitual Present Simple + dependent preposition.",
+                        explanation: "Plural subject 'Children' takes 'depend on'. 'Are depend on' is a voice error."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Everyone has a _____ way of learning.",
+                        options: ["differnt", "diffrent", "different", "diffirent"],
+                        correct: "different",
+                        conceptCue: "Concept Cue: Standard spelling of the adjective meaning distinct or not the same.",
+                        explanation: "The correct spelling is 'different'."
+                    }
+                ],
+
+                // ================= STAGE 5 (Items 41 to 50) =================
+                [
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Many students ______ that AI is helpful.",
+                        options: ["belive", "believe", "beleeve", "beleive"],
+                        correct: "believe",
+                        conceptCue: "Concept Cue: Remember the 'i before e except after c' spelling rule.",
+                        explanation: "The correct standard spelling is 'believe'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Students often use AI to finish ______ homework.",
+                        options: ["there", "they're", "thier", "their"],
+                        correct: "their",
+                        conceptCue: "Concept Cue: Third-person possessive adjective.",
+                        explanation: "'Their' indicates ownership of homework."
+                    },
+                    {
+                        category: "SYNTAX_FRAGMENT",
+                        prompt: "Artificial intelligence ______ very easy to access today.",
+                        options: ["is", "are", "be", "am"],
+                        correct: "is",
+                        conceptCue: "Concept Cue: Singular abstract noun requires third-person singular 'is'.",
+                        explanation: "'Artificial intelligence' is singular and requires 'is'."
+                    },
+                    {
+                        category: "SYNTAX_RUN_ON",
+                        prompt: "He uses the internet ______ information.",
+                        options: ["for find", "to finding", "to find", "to finds"],
+                        correct: "to find",
+                        conceptCue: "Concept Cue: Expressing purpose requires an infinitive of purpose ('to + base verb').",
+                        explanation: "Purpose is expressed using 'to find'. 'For find' is a common Arabic-L1 transfer error."
+                    },
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "A large number of people ______ that AI is dangerous.",
+                        options: ["believe", "believes", "believing", "is believe"],
+                        correct: "believe",
+                        conceptCue: "Concept Cue: The expression 'A large number of + plural noun' takes a plural verb.",
+                        explanation: "'A large number of people' functions as a plural subject, taking the plural verb 'believe'."
+                    },
+                    {
+                        category: "SYNTAX_FRAGMENT",
+                        prompt: "Some people ______ have enough time to study.",
+                        options: ["no", "don't", "not", "does not"],
+                        correct: "don't",
+                        conceptCue: "Concept Cue: Negating a present simple verb with plural subject requires 'do not / don't'.",
+                        explanation: "Plural subject 'Some people' requires auxiliary 'don't'."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "AI can affect our learning ______ a negative way.",
+                        options: ["on", "at", "in", "by"],
+                        correct: "in",
+                        conceptCue: "Concept Cue: The fixed English idiom is 'in a ... way'.",
+                        explanation: "The prepositional collocation is 'in a negative way'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "Students must use their own ______ when writing.",
+                        options: ["maind", "mind", "mined", "meind"],
+                        correct: "mind",
+                        conceptCue: "Concept Cue: Standard spelling of the noun for human intellect.",
+                        explanation: "The noun is spelled 'mind'. 'Mined' is the past tense of excavating minerals."
+                    },
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "An individual ______ to be careful when using AI.",
+                        options: ["need", "needs", "needing", "is need"],
+                        correct: "needs",
+                        conceptCue: "Concept Cue: Singular noun phrase 'An individual' requires singular verb inflection.",
+                        explanation: "Singular subject 'An individual' agrees with singular 'needs'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "The technology is called ______ Intelligence.",
+                        options: ["Artifical", "Artificial", "Artificail", "Arteficial"],
+                        correct: "Artificial",
+                        conceptCue: "Concept Cue: Standard spelling of the adjective ending in '-icial'.",
+                        explanation: "The correct standard academic spelling is 'Artificial'."
+                    }
+                ],
+
+                // ================= STAGE 6 (Items 51 to 60) =================
+                [
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "The student ________ understand the lecture.",
+                        options: ["dosen't", "doesnt", "doesn't", "dosent"],
+                        correct: "doesn't",
+                        conceptCue: "Concept Cue: Contraction of 'does not' places the apostrophe where 'o' is omitted.",
+                        explanation: "The contraction is spelled 'doesn't' with the apostrophe between 'n' and 't'."
+                    },
+                    {
+                        category: "SYNTAX_FRAGMENT",
+                        prompt: "While ________ for the exam, I used a dictionary.",
+                        options: ["study", "studying", "studied", "was study"],
+                        correct: "studying",
+                        conceptCue: "Concept Cue: Reduced adverbial time clause with 'While' requires a participle.",
+                        explanation: "In reduced adverb clauses with identical subjects, 'While' takes the present participle: 'While studying for the exam'."
+                    },
+                    {
+                        category: "GRAMMATICAL_ACCURACY",
+                        prompt: "Writing ________ essay requires a lot of concentration.",
+                        options: ["a", "an", "the", "some"],
+                        correct: "an",
+                        conceptCue: "Concept Cue: Use 'an' before singular countable nouns beginning with a vowel sound.",
+                        explanation: "'Essay' begins with a vowel sound (/e/), requiring the indefinite article 'an'."
+                    },
+                    {
+                        category: "TREND_PREPOSITION",
+                        prompt: "Students have a high dependence ________ technology.",
+                        options: ["to", "with", "on", "at"],
+                        correct: "on",
+                        conceptCue: "Concept Cue: The noun 'dependence' collocates with 'on'.",
+                        explanation: "The standard academic preposition is 'dependence on'."
+                    },
+                    {
+                        category: "SUBJECT_VERB_AGREEMENT",
+                        prompt: "Some individuals ________ that AI is dangerous.",
+                        options: ["believe", "believes", "believing", "is believe"],
+                        correct: "believe",
+                        conceptCue: "Concept Cue: Plural subject 'Some individuals' takes the plural verb.",
+                        explanation: "'Some individuals' is plural, requiring 'believe'."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "The ________ spelling is important in academic writing.",
+                        options: ["artifical", "artificial", "arteficial", "artificail"],
+                        correct: "artificial",
+                        conceptCue: "Concept Cue: Check vowel pattern: a-r-t-i-f-i-c-i-a-l.",
+                        explanation: "The correct spelling is 'artificial'."
+                    },
+                    {
+                        category: "GRAMMATICAL_ACCURACY",
+                        prompt: "Using AI can lead to many ________.",
+                        options: ["problem", "problems", "a problem", "the problem"],
+                        correct: "problems",
+                        conceptCue: "Concept Cue: The quantifier 'many' modifies plural countable nouns.",
+                        explanation: "'Many' requires the plural countable noun 'problems'."
+                    },
+                    {
+                        category: "MECHANICS_PUNCTUATION",
+                        prompt: "We need to find ________ results for this study.",
+                        options: ["diffronte", "different", "differente", "diffrent"],
+                        correct: "different",
+                        conceptCue: "Concept Cue: Standard academic spelling: d-i-f-f-e-r-e-n-t.",
+                        explanation: "The correct standard spelling is 'different'."
+                    },
+                    {
+                        category: "GRAMMATICAL_ACCURACY",
+                        prompt: "In the ________, robots might do our jobs.",
+                        options: ["Futuer", "future", "Future", "futur"],
+                        correct: "future",
+                        conceptCue: "Concept Cue: Mid-sentence common noun does not take capitalization.",
+                        explanation: "The lowercase standard noun is 'future'. Common nouns are not capitalized mid-sentence."
+                    },
+                    {
+                        category: "LEXICAL_COLLOCATION",
+                        prompt: "I am interested in this ________ topic.",
+                        options: ["spesefic", "specifec", "specific", "spicific"],
+                        correct: "specific",
+                        conceptCue: "Concept Cue: Standard spelling of the adjective meaning particular or explicit.",
+                        explanation: "The correct academic spelling is 'specific'."
+                    }
+                ]
+            ]
+        };
+
+        function handleStartGame(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('input-name').value.trim();
+            const secInput = document.getElementById('input-section').value.trim();
+
+            if (!nameInput || !secInput) {
+                showToast("Please enter both your Full Name and ID / Section.");
+                return;
+            }
+
+            GameData.studentName = nameInput;
+            GameData.studentSection = secInput;
+
+            document.getElementById('hud-name-display').textContent = GameData.studentName;
+            document.getElementById('hud-student-tag').style.display = 'flex';
+            document.getElementById('stage-nav-bar').style.display = 'block';
+
+            document.getElementById('screen-login').style.display = 'none';
+            document.getElementById('screen-gameplay').style.display = 'block';
+
+            startClassroomTimer();
+            renderCurrentQuestion();
+        }
+
+        function startClassroomTimer() {
+            GameData.timerInterval = setInterval(() => {
+                if (GameData.timerRunning && GameData.timerSeconds > 0) {
+                    GameData.timerSeconds--;
+                    const m = Math.floor(GameData.timerSeconds / 60);
+                    const s = GameData.timerSeconds % 60;
+                    document.getElementById('timer-display').textContent = 
+                        `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                }
+            }, 1000);
+
+            document.getElementById('timer-toggle-btn').addEventListener('click', () => {
+                GameData.timerRunning = !GameData.timerRunning;
+                document.getElementById('timer-toggle-btn').textContent = GameData.timerRunning ? '⏸' : '▶';
+            });
+        }
+
+        function renderCurrentQuestion() {
+            for (let i = 1; i <= 6; i++) {
+                const node = document.getElementById(`step-node-${i}`);
+                node.className = 'step-bubble';
+                if (i < GameData.currentStage) node.classList.add('done');
+                if (i === GameData.currentStage) node.classList.add('current');
+            }
+
+            GameData.lockedAnswerForCurrent = null;
+            document.getElementById('btn-next-question').disabled = true;
+            document.getElementById('lock-status-text').textContent = "Select an option to immediately lock your answer.";
+
+            const stageNum = GameData.currentStage;
+            const qIdx = GameData.currentQuestionIdx;
+
+            document.getElementById('stage-badge-text').textContent = `STAGE ${stageNum} OF 6`;
+            document.getElementById('question-tracker').textContent = `Item ${qIdx + 1} of 10`;
+
+            const stageTitles = [
+                "Stage 1: Core Formative Diagnostics",
+                "Stage 2: Precision Syntax & Word Forms",
+                "Stage 3: Punctuation Mechanics & Structural Logic",
+                "Stage 4: Collocations & Academic Register",
+                "Stage 5: High-Frequency Error Remediation",
+                "Stage 6: Master Writing Accuracy Finale"
+            ];
+
+            const stageDescs = [
+                "Drilling Subject-Verb Concord, Plurals, and Countability.",
+                "Negation, Auxiliaries, Spelling, and Discourse Markers.",
+                "Punctuation Spacing, Run-ons, Fragments, and Transitions.",
+                "Prepositional Collocations, Gerunds, and Lexical Distinctions.",
+                "Agreement with Quantifiers, Base Verbs, and Spelling.",
+                "Syntax, Articles, Prepositions, and Formal Vocabulary."
+            ];
+
+            document.getElementById('stage-title-text').textContent = stageTitles[stageNum - 1];
+            document.getElementById('stage-desc-text').textContent = stageDescs[stageNum - 1];
+
+            const item = GameData.stages[stageNum - 1][qIdx];
+            const container = document.getElementById('dynamic-stage-body');
+            container.innerHTML = '';
+
+            const box = document.createElement('div');
+            box.className = 'evidence-dossier-box';
+
+            box.innerHTML = `
+                <div class="concept-cue">${item.conceptCue}</div>
+                <div class="case-prompt">${item.prompt}</div>
+            `;
+
+            const optionsStack = document.createElement('div');
+            optionsStack.className = 'options-stack grid-2';
+
+            item.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerHTML = `
+                    <span>${opt}</span>
+                    <span class="lock-indicator">🔒 LOCKED</span>
+                `;
+
+                btn.onclick = () => {
+                    if (GameData.lockedAnswerForCurrent !== null) return; // Strict lock: 1 attempt only
+
+                    audio.lockSound();
+                    GameData.lockedAnswerForCurrent = opt;
+
+                    btn.classList.add('is-locked');
+                    optionsStack.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+
+                    document.getElementById('lock-status-text').textContent = "Answer submitted and locked. Proceed to next item.";
+                    document.getElementById('btn-next-question').disabled = false;
+                };
+
+                optionsStack.appendChild(btn);
+            });
+
+            box.appendChild(optionsStack);
+            container.appendChild(box);
+        }
+
+        function handleProceedNext() {
+            audio.advanceSound();
+
+            const stageNum = GameData.currentStage;
+            const qIdx = GameData.currentQuestionIdx;
+            const sourceItem = GameData.stages[stageNum - 1][qIdx];
+
+            const isCorrect = (GameData.lockedAnswerForCurrent === sourceItem.correct);
+
+            GameData.userSubmissions.push({
+                stage: `Stage ${stageNum}`,
+                category: sourceItem.category,
+                prompt: sourceItem.prompt,
+                studentChoice: GameData.lockedAnswerForCurrent,
+                correctAnswer: sourceItem.correct,
+                isCorrect: isCorrect,
+                explanation: sourceItem.explanation
+            });
+
+            if (GameData.currentQuestionIdx < 9) {
+                GameData.currentQuestionIdx++;
+                renderCurrentQuestion();
+            } else {
+                if (GameData.currentStage < 6) {
+                    GameData.currentStage++;
+                    GameData.currentQuestionIdx = 0;
+                    renderCurrentQuestion();
+                } else {
+                    renderFinalDossier();
+                }
+            }
+        }
+
+        function renderFinalDossier() {
+            clearInterval(GameData.timerInterval);
+            audio.fanfare();
+
+            document.getElementById('screen-gameplay').style.display = 'none';
+            document.getElementById('screen-dossier').style.display = 'block';
+            document.getElementById('step-node-7').classList.add('done', 'current');
+
+            const totalItems = GameData.userSubmissions.length; // 60
+            const correctCount = GameData.userSubmissions.filter(s => s.isCorrect).length;
+            const percentage = Math.round((correctCount / totalItems) * 100);
+
+            document.getElementById('dossier-student-name').textContent = GameData.studentName;
+            document.getElementById('dossier-student-section').textContent = GameData.studentSection;
+            document.getElementById('dossier-score-text').textContent = `${correctCount} / ${totalItems} (${percentage}%)`;
+
+            const rankBox = document.getElementById('dossier-rank-container');
+            let rankClass = "rating-cadet";
+            let rankTitle = "Cadet in Training (<70%)";
+
+            if (percentage >= 85) {
+                rankClass = "rating-master";
+                rankTitle = "Master Academic Writer (85%+ Exceptional)";
+            } else if (percentage >= 70) {
+                rankClass = "rating-senior";
+                rankTitle = "Senior Editor (70–84% Competent)";
+            }
+
+            rankBox.innerHTML = `<span class="rating-badge ${rankClass}">🎖️ ${rankTitle}</span>`;
+
+            const tbody = document.getElementById('dossier-table-body');
+            tbody.innerHTML = '';
+
+            GameData.userSubmissions.forEach((sub, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${idx + 1}</strong></td>
+                    <td>
+                        <div style="font-weight: 700; color: var(--accent-gold);">${sub.category}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">${sub.stage}</div>
+                    </td>
+                    <td>${sub.prompt}</td>
+                    <td>
+                        <span class="status-pill ${sub.isCorrect ? 'correct' : 'incorrect'}">
+                            ${sub.isCorrect ? '✓' : '✗'} ${sub.studentChoice}
+                        </span>
+                    </td>
+                    <td style="color: #38bdf8; font-weight: 600;">${sub.correctAnswer}</td>
+                    <td style="font-size: 0.82rem; color: #cbd5e1;">${sub.explanation}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
